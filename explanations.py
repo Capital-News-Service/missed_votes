@@ -5,7 +5,7 @@ Created on Wed Feb 14 10:33:32 2018
 
 @author: gmkanik
 """
-
+#import needed packages
 import tweepy
 import json
 
