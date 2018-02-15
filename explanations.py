@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Feb 14 10:33:32 2018
+
+@author: gmkanik
+"""
+
 import tweepy
 import json
 
@@ -15,9 +23,15 @@ access_token_secret = keys["access_token_secret"]
 # OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-#Twitter tweet
+
+# Store access keys in a way to send to Twitter
 api = tweepy.API(auth)
+
+# Write out the thing we're going to tweet
 turtle = "turtle"
+
+# Send the tweet
 api.update_status(turtle)
 
+# Print it out in the console
 print(turtle)
