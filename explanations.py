@@ -5,9 +5,10 @@ Created on Wed Feb 14 10:33:32 2018
 
 @author: gmkanik
 """
-#import needed packages
+
 import tweepy
 import json
+import requests
 
 #opens and reads json file
 keys={}
@@ -35,3 +36,11 @@ api.update_status(turtle)
 
 # Print it out in the console
 print(turtle)
+
+
+
+
+url = 'https://api.propublica.org/congress/v1/house/votes/recent.json'
+
+response = requests.get(url)
+print(response.status_code)
