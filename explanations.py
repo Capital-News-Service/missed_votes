@@ -10,6 +10,8 @@ import tweepy
 import json
 import requests
 
+#comment from sean
+
 #opens and reads json file
 keys={}
 with open("json/keys.json") as file:
