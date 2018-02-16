@@ -12,7 +12,7 @@ import requests
 
 #opens and reads json file
 keys={}
-with open("json/keys.json") as file:
+with open("/Macintosh HD/Users/gmkanik/Desktop/missed_votes/keys/keys.json") as file:
     keys = json.loads(file.read())
     
 # Consumer keys and access tokens, used for OAuth
@@ -38,7 +38,7 @@ with open("json/keys.json") as file:
 #print(turtle)
 
 apikey={}
-with open("apikey.json") as file:
+with open("/Macintosh HD/Users/gmkanik/Desktop/missed_votes/keys/apikey.json") as file:
     apikey = json.loads(file.read())
 
     
