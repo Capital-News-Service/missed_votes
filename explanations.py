@@ -9,10 +9,12 @@ Created on Wed Feb 14 10:33:32 2018
 import tweepy
 import json
 import requests
+import os
+os.getcwd()
 
 #opens and reads json file
 keys={}
-with open("/Macintosh HD/Users/gmkanik/Desktop/missed_votes/keys/keys.json") as file:
+with open("keys/keys.json") as file:
     keys = json.loads(file.read())
     
 # Consumer keys and access tokens, used for OAuth
@@ -38,11 +40,16 @@ with open("/Macintosh HD/Users/gmkanik/Desktop/missed_votes/keys/keys.json") as 
 #print(turtle)
 
 apikey={}
-with open("/Macintosh HD/Users/gmkanik/Desktop/missed_votes/keys/apikey.json") as file:
+with open("keys/apikey.json") as file:
     apikey = json.loads(file.read())
+
+#x_api_key = apikey["x_api_key"]
 
     
 #url = 'https://api.propublica.org/congress/v1/house/votes/recent.json'
 
 #response = requests.get(url)
 #print(response.status_code)
+
+#status codes    
+#https://www.dataquest.io/blog/python-api-tutorial/
