@@ -44,12 +44,12 @@ apikey={}
 with open("keys/apikey.json") as file:
     apikey = json.loads(file.read())
 
-#authenticate and calls api
+#authenticate and calls api to print text
 x_api_key = apikey["x_api_key"]   
 url = 'https://api.propublica.org/congress/v1/house/votes/recent.json'
 headers = {'X-API-KEY': x_api_key}
 response = requests.get(url, headers=headers)
-print(response.status_code)
+#json into string
+print(response.text)
 
-#status codes    
-#https://www.dataquest.io/blog/python-api-tutorial/
+#need object to search
