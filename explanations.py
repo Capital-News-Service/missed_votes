@@ -10,39 +10,39 @@ import tweepy
 import json
 import requests
 
-#comment from sean
-
 #opens and reads json file
 keys={}
 with open("json/keys.json") as file:
     keys = json.loads(file.read())
     
 # Consumer keys and access tokens, used for OAuth
-consumer_key = keys["consumer_key"]
-consumer_secret = keys["consumer_secret"]
-access_token = keys["access_token"]
-access_token_secret = keys["access_token_secret"]
+#consumer_key = keys["consumer_key"]
+#consumer_secret = keys["consumer_secret"]
+#access_token = keys["access_token"]
+#access_token_secret = keys["access_token_secret"]
  
 # OAuth process, using the keys and tokens
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+#auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+#auth.set_access_token(access_token, access_token_secret)
 
 # Store access keys in a way to send to Twitter
-api = tweepy.API(auth)
+#api = tweepy.API(auth)
 
 # Write out the thing we're going to tweet
-turtle = "turtle"
+#turtle = "turtle"
 
 # Send the tweet
-api.update_status(turtle)
+#api.update_status(turtle)
 
 # Print it out in the console
-print(turtle)
+#print(turtle)
 
+apikey={}
+with open("apikey.json") as file:
+    apikey = json.loads(file.read())
 
+    
+#url = 'https://api.propublica.org/congress/v1/house/votes/recent.json'
 
-
-url = 'https://api.propublica.org/congress/v1/house/votes/recent.json'
-
-response = requests.get(url)
-print(response.status_code)
+#response = requests.get(url)
+#print(response.status_code)
