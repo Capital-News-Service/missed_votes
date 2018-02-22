@@ -55,15 +55,16 @@ with open("keys/apikey.json") as file:
 #authenticate and calls api to print text
 x_api_key = apikey["x_api_key"]
 
-url = 'https://api.propublica.org/congress/v1/80-115/senate/members.json'
+url = 'https://api.propublica.org/congress/v1/102-115/house/members.json'
 headers = {'X-API-KEY': x_api_key}
 response = requests.get(url, headers=headers)
 jsonfile = response.json()
-#member_id = jsonfile['display_name']
 
 #data in results into dataframe
 data = jsonfile['results']
 data_df = pd.DataFrame(data)
+member = data['members']
+member_df = pd.DataFrame(member)
 
 
 #finds specific column in dataframe  
