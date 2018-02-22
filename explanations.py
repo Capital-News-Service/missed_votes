@@ -11,6 +11,7 @@ import os
 import tweepy
 import json
 import requests
+import pandas as pd
 
 #opens and reads keys.json
 keys={}
@@ -31,10 +32,14 @@ with open("keys/keys.json") as file:
 #api = tweepy.API(auth)
 
 # Write out the thing we're going to tweet
-#turtle = "turtle"
+def buildTweet(text):
+    tweet = text
+    print(tweet)
+    #sendTweet(tweet)
 
 # Send the tweet
-#api.update_status(turtle)
+#def sendTweet(content):
+#    api.update_status(content)
 
 # Print it out in the console
 #print(turtle)
@@ -45,11 +50,31 @@ with open("keys/apikey.json") as file:
     apikey = json.loads(file.read())
 
 #authenticate and calls api to print text
-x_api_key = apikey["x_api_key"]   
-url = 'https://api.propublica.org/congress/v1/house/votes/recent.json'
+x_api_key = apikey["x_api_key"]
+
+url = 'https://api.propublica.org/congress/v1/115/explanations.json'
 headers = {'X-API-KEY': x_api_key}
 response = requests.get(url, headers=headers)
-#json into string
-print(response.text)
+jsonfile = response.json()
 
-#need object to search
+#data in results into dataframe
+data = jsonfile['results']
+data_df = pd.DataFrame(data)
+
+#finds specific column in dataframe  
+if (len(data_df) > 0):
+    irow = data_df.iterrows()
+    for i in irow:
+        print(i[1]['member_id'])
+        
+#        buildTweet(i[1]['member_id'])
+        
+        
+          
+
+
+
+
+    
+
+
