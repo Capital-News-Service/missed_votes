@@ -55,11 +55,11 @@ with open("keys/apikey.json") as file:
 #authenticate and calls api to print text
 x_api_key = apikey["x_api_key"]
 
-url = 'https://api.propublica.org/congress/v1/members/B001304/explanations/115.json'
+url = 'https://api.propublica.org/congress/v1/80-115/senate/members.json'
 headers = {'X-API-KEY': x_api_key}
 response = requests.get(url, headers=headers)
 jsonfile = response.json()
-member_id = jsonfile['display_name']
+#member_id = jsonfile['display_name']
 
 #data in results into dataframe
 data = jsonfile['results']
@@ -70,8 +70,7 @@ data_df = pd.DataFrame(data)
 if (len(data_df) > 0):
     irow = data_df.iterrows()
     for i in irow:
-#        buildTweet(i[1]['date'],member_id,i[1]['text'])
-        
+#        buildTweet(i[1]['date'],member_id,i[1]['text'])      
 #        buildTweet(i[1]['name'],i[1]['party'],i[1]['category'],i[1]['url'])
         
         
