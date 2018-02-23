@@ -60,12 +60,23 @@ headers = {'X-API-KEY': x_api_key}
 response = requests.get(url, headers=headers)
 jsonfile = response.json()
 
-#data in results into dataframe
+#data in results/members into dataframe
 data = jsonfile.get('results')
 for i in data:
     member = i['members']
-    print(member)
     member_df = pd.DataFrame(member)
+
+#take out member ids
+idarray = []
+
+if (len(member_df)) > 0:
+    mrow = member_df.iterrows()
+    for m in mrow:
+        idarray.append(m[1]['id'])
+
+print(idarray)
+
+
 
 
 #data_df = pd.DataFrame(data)
