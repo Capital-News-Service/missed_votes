@@ -55,22 +55,25 @@ with open("keys/apikey.json") as file:
 #authenticate and calls api to print text
 x_api_key = apikey["x_api_key"]
 
-url = 'https://api.propublica.org/congress/v1/102-115/house/members.json'
+url = 'https://api.propublica.org/congress/v1/80-115/senate/members.json'
 headers = {'X-API-KEY': x_api_key}
 response = requests.get(url, headers=headers)
 jsonfile = response.json()
 
 #data in results into dataframe
-data = jsonfile['results']
-data_df = pd.DataFrame(data)
-member = data['members']
-member_df = pd.DataFrame(member)
+data = jsonfile.get('results')
+for i in data:
+    member = i['members']
+    print(member)
+    member_df = pd.DataFrame(member)
 
+
+#data_df = pd.DataFrame(data)
 
 #finds specific column in dataframe  
-if (len(data_df) > 0):
-    irow = data_df.iterrows()
-    for i in irow:
+#if (len(data_df) > 0):
+#    irow = data_df.iterrows()
+#    for i in irow:
 #        buildTweet(i[1]['date'],member_id,i[1]['text'])      
 #        buildTweet(i[1]['name'],i[1]['party'],i[1]['category'],i[1]['url'])
         
