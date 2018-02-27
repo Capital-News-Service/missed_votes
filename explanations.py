@@ -76,20 +76,20 @@ if (len(member_df)) > 0:
 
 print(idarray)
 
+memberid = idarray[0]
 
 
-
-#apikey={}
-#with open("keys/apikey.json") as file:
-#    apikey = json.loads(file.read())
+apikey={}
+with open("keys/apikey.json") as file:
+    apikey = json.loads(file.read())
 
 #authenticate and calls api to print text
-#x_api_key = apikey["x_api_key"]
+x_api_key = apikey["x_api_key"]
 
 url = 'https://api.propublica.org/congress/v1/members/' + memberid + '/explanations/115.json'
-#headers = {'X-API-KEY': x_api_key}
-#response = requests.get(url, headers=headers)
-#jsonfile = response.json()
+headers = {'X-API-KEY': x_api_key}
+response = requests.get(url, headers=headers)
+jsonfile = response.json()
 
 
 
