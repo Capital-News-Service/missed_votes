@@ -101,19 +101,20 @@ if (len(maryland)) > 0:
     for m in mrowid:
         arrayid.append(m[1]['id'])   
 
-
-
-
 #takes out each member id out of the array 1 at a time
-for a in arrayid:
-    memid = a
-    
-    #calls all legislative MD members api and puts results into json
+for memid in arrayid:
+
+    #calls excuses for all legislative MD members api and puts results in json
     urlexcuse = 'https://api.propublica.org/congress/v1/members/' + memid + '/explanations/115.json'
     responseexcuse = requests.get(urlexcuse, headers=headers)
     jsonfileexcuse = responseexcuse.json()
-    print(jsonfileexcuse)
 
+#turn jsonfileexcuse into dataframe
+#    dataexcuse = jsonfileexcuse.get('resutls')
+#    for e in dataexcuse:
+#        memberexcuse = e['members']
+#        memberexcuse_df = pd.DataFrame(memberexcuse)
+#        print(memberexcuse_df)
 
 
 
