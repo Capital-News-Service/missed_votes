@@ -48,48 +48,49 @@ import pandas as pd
 #print(turtle)
 
 #opens and reads apikey.json
-apikey={}
+apikeyid={}
 with open("keys/apikey.json") as file:
-    apikey = json.loads(file.read())
+    apikeyid = json.loads(file.read())
 
 #authenticate and calls api to print text
-x_api_key = apikey["x_api_key"]
+x_api_keyid = apikeyid["x_api_key"]
 
-url = 'https://api.propublica.org/congress/v1/80-115/senate/members.json'
-headers = {'X-API-KEY': x_api_key}
-response = requests.get(url, headers=headers)
-jsonfile = response.json()
+urlid = 'https://api.propublica.org/congress/v1/80-115/senate/members.json'
+headers = {'X-API-KEY': x_api_keyid}
+responseid = requests.get(urlid, headers=headers)
+jsonfileid = responseid.json()
 
 #data in results/members into dataframe
-data = jsonfile.get('results')
+data = jsonfileid.get('results')
 for d in data:
-    member = d['members']
-    member_df = pd.DataFrame(member)
+    memberid = d['members']
+    memberid_df = pd.DataFrame(memberid)
 
 #take out member ids
-idarray = []
+arrayid = []
 
-if (len(member_df)) > 0:
-    mrow = member_df.iterrows()
-    for m in mrow:
-        idarray.append(m[1]['id'])
+#take member ids out of data frame and putting them in an array
+if (len(memberid_df)) > 0:
+    mrowid = memberid_df.iterrows()
+    for m in mrowid:
+        arrayid.append(m[1]['id'])
 
-print(idarray)
+#takes out each member id out of the array 1 at a time
+for a in arrayid:
+    memid = a
+       
+    #calling over excuses api while inserting a new members id for each loop
+    apikeyex={}
+    with open("keys/apikey.json") as file:
+       apikeyex = json.loads(file.read())
 
-memberid = idarray[0]
+    #authenticate and calls api to print text
+    x_api_keyex = apikeyex["x_api_key"]
 
-
-apikey={}
-with open("keys/apikey.json") as file:
-    apikey = json.loads(file.read())
-
-#authenticate and calls api to print text
-x_api_key = apikey["x_api_key"]
-
-url = 'https://api.propublica.org/congress/v1/members/' + memberid + '/explanations/115.json'
-headers = {'X-API-KEY': x_api_key}
-response = requests.get(url, headers=headers)
-jsonfile = response.json()
+    urlex = 'https://api.propublica.org/congress/v1/members/' + memid + '/explanations/115.json'
+    headers = {'X-API-KEY': x_api_keyex}
+    responseex = requests.get(urlex, headers=headers)
+    jsonfileex = responseex.json()
 
 
 
