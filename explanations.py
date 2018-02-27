@@ -12,6 +12,7 @@ import tweepy
 import json
 import requests
 import pandas as pd
+import numpy as np
 
 #opens and reads keys.json
 #keys={}
@@ -48,50 +49,70 @@ import pandas as pd
 #print(turtle)
 
 #opens and reads apikey.json
-apikeyid={}
+apikey={}
 with open("keys/apikey.json") as file:
-    apikeyid = json.loads(file.read())
-
+    apikey = json.loads(file.read())
 #authenticate and calls api to print text
-x_api_keyid = apikeyid["x_api_key"]
+x_api_key = apikey["x_api_key"]
 
-urlid = 'https://api.propublica.org/congress/v1/80-115/senate/members.json'
-headers = {'X-API-KEY': x_api_keyid}
-responseid = requests.get(urlid, headers=headers)
-jsonfileid = responseid.json()
+#calls senate members api and puts results into json
+urlsenate = 'https://api.propublica.org/congress/v1/115/senate/members.json'
+headers = {'X-API-KEY': x_api_key}
+responsesenate = requests.get(urlsenate, headers=headers)
+jsonfilesenate = responsesenate.json()
 
-#data in results/members into dataframe
-data = jsonfileid.get('results')
-for d in data:
-    memberid = d['members']
-    memberid_df = pd.DataFrame(memberid)
+#json data in senate results into dataframe
+datasenate = jsonfilesenate.get('results')
+for s in datasenate:
+    membersenate = s['members']
+    membersenate_df = pd.DataFrame(membersenate)
 
-#take out member ids
+#find senate member ids for MD members
+membersenate_df = membersenate_df.replace(np.nan, '', regex=True)
+maryland = membersenate_df[membersenate_df['state'].str.contains("MD")]
+
+#put only MD senate member ids in array
 arrayid = []
-
-#take member ids out of data frame and putting them in an array
-if (len(memberid_df)) > 0:
-    mrowid = memberid_df.iterrows()
+if (len(maryland)) > 0:
+    mrowid = maryland.iterrows()
     for m in mrowid:
         arrayid.append(m[1]['id'])
+        
+        
+        
+#calls house members api and puts results into json
+urlhouse = 'https://api.propublica.org/congress/v1/115/house/members.json'
+responsehouse = requests.get(urlhouse, headers=headers)
+jsonfilehouse = responsehouse.json()
+
+#json data in house results into dataframe
+datahouse = jsonfilehouse.get('results')
+for h in datahouse:
+    memberhouse = h['members']
+    memberhouse_df = pd.DataFrame(memberhouse)
+
+#find house member ids for MD members
+memberhouse_df = memberhouse_df.replace(np.nan, '', regex=True)
+maryland = memberhouse_df[memberhouse_df['state'].str.contains("MD")]
+     
+#put only MD house member ids in array
+if (len(maryland)) > 0:
+    mrowid = maryland.iterrows()
+    for m in mrowid:
+        arrayid.append(m[1]['id'])   
+
+
+
 
 #takes out each member id out of the array 1 at a time
 for a in arrayid:
     memid = a
-       
-    #calling over excuses api while inserting a new members id for each loop
-    apikeyex={}
-    with open("keys/apikey.json") as file:
-       apikeyex = json.loads(file.read())
-
-    #authenticate and calls api to print text
-    x_api_keyex = apikeyex["x_api_key"]
-
-    urlex = 'https://api.propublica.org/congress/v1/members/' + memid + '/explanations/115.json'
-    headers = {'X-API-KEY': x_api_keyex}
-    responseex = requests.get(urlex, headers=headers)
-    jsonfileex = responseex.json()
-
+    
+    #calls all legislative MD members api and puts results into json
+    urlexcuse = 'https://api.propublica.org/congress/v1/members/' + memid + '/explanations/115.json'
+    responseexcuse = requests.get(urlexcuse, headers=headers)
+    jsonfileexcuse = responseexcuse.json()
+    print(jsonfileexcuse)
 
 
 
