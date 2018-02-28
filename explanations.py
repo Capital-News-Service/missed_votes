@@ -108,14 +108,13 @@ for memid in arrayid:
     urlexcuse = 'https://api.propublica.org/congress/v1/members/' + memid + '/explanations/115.json'
     responseexcuse = requests.get(urlexcuse, headers=headers)
     jsonfileexcuse = responseexcuse.json()
-
-#turn jsonfileexcuse into dataframe
-#    dataexcuse = jsonfileexcuse.get('resutls')
-#    for e in dataexcuse:
-#        memberexcuse = e['members']
-#        memberexcuse_df = pd.DataFrame(memberexcuse)
-#        print(memberexcuse_df)
-
+    
+    dataexcuse = jsonfileexcuse.get('results')
+    if len(dataexcuse) == 0:
+        continue
+    else:
+        print(jsonfileexcuse)
+    
 
 
 
