@@ -6,8 +6,6 @@ Created on Wed Feb 14 10:33:32 2018
 @author: gmkanik
 """
 
-#import os
-#os.getcwd()
 import tweepy
 import json
 import requests
@@ -15,38 +13,38 @@ import pandas as pd
 import numpy as np
 
 #opens and reads keys.json
-#keys={}
-#with open("keys/keys.json") as file:
-#    keys = json.loads(file.read())
+keys={}
+with open("keys/keys.json") as file:
+    keys = json.loads(file.read())
     
 # Consumer keys and access tokens, used for OAuth
-#consumer_key = keys["consumer_key"]
-#consumer_secret = keys["consumer_secret"]
-#access_token = keys["access_token"]
-#access_token_secret = keys["access_token_secret"]
+consumer_key = keys["consumer_key"]
+consumer_secret = keys["consumer_secret"]
+access_token = keys["access_token"]
+access_token_secret = keys["access_token_secret"]
 
 # OAuth process, using the keys and tokens
-#auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-#auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
 # Store access keys in a way to send to Twitter
-#api = tweepy.API(auth)
+api = tweepy.API(auth)
 
 # Write out the thing we're going to tweet
 #def buildTweet(argument1, argument2, argument3):
+#    tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
 #    tweet = argument1 + ", " + argument2 + ", " + " missed a vote because of '" + argument3 + "'. " + argument4   
 #    tweet = "On " + argument1 + " " + argument2 + " said '" + argument3 + ".'"
 #    sendTweet(tweet)
 
 # Send the tweet
-#def sendTweet(content):
-#    try:
-#        api.update_status(content)
-#    except tweepy.error.TweepError:
-#        pass
+def sendTweet(content):
+    try:
+        api.update_status(content)
+    except tweepy.error.TweepError:
+        pass
 
-# Print it out in the console
-#print(turtle)
+
 
 #opens and reads apikey.json
 apikey={}
@@ -79,7 +77,6 @@ if (len(maryland)) > 0:
         arrayid.append(m[1]['id'])
         
         
-        
 #calls house members api and puts results into json
 urlhouse = 'https://api.propublica.org/congress/v1/115/house/members.json'
 responsehouse = requests.get(urlhouse, headers=headers)
@@ -101,6 +98,8 @@ if (len(maryland)) > 0:
     for m in mrowid:
         arrayid.append(m[1]['id'])   
 
+
+
 #takes out each member id out of the array 1 at a time
 for memid in arrayid:
 
@@ -114,7 +113,7 @@ for memid in arrayid:
     if len(dataexcuse) == 0:
         continue
     else:
-        #if MD member has excuses gets name and info on excuses
+        #if MD member has excuses gets name and info on excuses and tweets 
         mdexcuse_df = pd.DataFrame(jsonfileexcuse)
         if (len(mdexcuse_df) > 0):
             irow = mdexcuse_df.iterrows()
@@ -126,24 +125,8 @@ for memid in arrayid:
             irow = dataexcuse_df.iterrows()
             for i in irow:
                 print(i[1]['date'])
-        
-    
-
-
-#finds specific column in dataframe  
-#if (len(data_df) > 0):
-#    irow = data_df.iterrows()
-#    for i in irow:
-#        buildTweet(i[1]['date'],member_id,i[1]['text'])      
-#        buildTweet(i[1]['name'],i[1]['party'],i[1]['category'],i[1]['url'])
-
-
-
-
-
-
-#type(variable) is list/dict/str/int
-#python gives back True or False          
+                print(i[1]['url'])
+ #               buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
 
 
 
