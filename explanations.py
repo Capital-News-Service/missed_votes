@@ -109,13 +109,17 @@ for memid in arrayid:
     responseexcuse = requests.get(urlexcuse, headers=headers)
     jsonfileexcuse = responseexcuse.json()
     
+    #if MD member has no excuses removes their results
     dataexcuse = jsonfileexcuse.get('results')
     if len(dataexcuse) == 0:
         continue
     else:
-        print(jsonfileexcuse)
+        mdexcuse_df = pd.DataFrame(dataexcuse)
+        for e in mdexcuse_df:
+            print(e[1]['date'])
+            print(e[1]['chamber'])
+        
     
-
 
 
 #finds specific column in dataframe  
@@ -124,9 +128,22 @@ for memid in arrayid:
 #    for i in irow:
 #        buildTweet(i[1]['date'],member_id,i[1]['text'])      
 #        buildTweet(i[1]['name'],i[1]['party'],i[1]['category'],i[1]['url'])
-        
-        
-          
+
+    data = data.replace(np.nan, '', regex=True)    
+    chesapeakebay = data[data['abstact'].str.contains("Chesapeake Bay")]
+    
+    if (len(chesapeakebay) > 0):
+        irow = chesapeakebay.iterrows()
+        for i in irow:
+            print(i[1]['publication_date'])
+            print(i[1]['document_number'])
+            buildTweet(i[1]['publication_date'],i[1]['html_url'])
+            text = getFullText(i[1]['body_html_url'])
+            #print(text)
+            print("\n")
+
+#type(variable) is list/dict/str/int
+#python gives back True or False          
 
 
 
