@@ -13,15 +13,15 @@ import pandas as pd
 import numpy as np
 
 #opens and reads keys.json
-keys={}
-with open("keys/keys.json") as file:
-    keys = json.loads(file.read())
+mvkey={}
+with open("keys/mvkey.json") as file:
+    mvkey = json.loads(file.read())
     
 # Consumer keys and access tokens, used for OAuth
-consumer_key = keys["consumer_key"]
-consumer_secret = keys["consumer_secret"]
-access_token = keys["access_token"]
-access_token_secret = keys["access_token_secret"]
+consumer_key = mvkey["consumer_key"]
+consumer_secret = mvkey["consumer_secret"]
+access_token = mvkey["access_token"]
+access_token_secret = mvkey["access_token_secret"]
 
 # OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
