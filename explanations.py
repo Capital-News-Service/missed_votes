@@ -114,10 +114,18 @@ for memid in arrayid:
     if len(dataexcuse) == 0:
         continue
     else:
-        mdexcuse_df = pd.DataFrame(dataexcuse)
-        for e in mdexcuse_df:
-            print(e[1]['date'])
-            print(e[1]['chamber'])
+        #if MD member has excuses gets name and info on excuses
+        mdexcuse_df = pd.DataFrame(jsonfileexcuse)
+        if (len(mdexcuse_df) > 0):
+            irow = mdexcuse_df.iterrows()
+            for m in irow:
+                print(m[1]['display_name'])
+    
+        dataexcuse_df = pd.DataFrame(dataexcuse)
+        if (len(dataexcuse_df) > 0):
+            irow = dataexcuse_df.iterrows()
+            for i in irow:
+                print(i[1]['date'])
         
     
 
@@ -129,18 +137,10 @@ for memid in arrayid:
 #        buildTweet(i[1]['date'],member_id,i[1]['text'])      
 #        buildTweet(i[1]['name'],i[1]['party'],i[1]['category'],i[1]['url'])
 
-    data = data.replace(np.nan, '', regex=True)    
-    chesapeakebay = data[data['abstact'].str.contains("Chesapeake Bay")]
-    
-    if (len(chesapeakebay) > 0):
-        irow = chesapeakebay.iterrows()
-        for i in irow:
-            print(i[1]['publication_date'])
-            print(i[1]['document_number'])
-            buildTweet(i[1]['publication_date'],i[1]['html_url'])
-            text = getFullText(i[1]['body_html_url'])
-            #print(text)
-            print("\n")
+
+
+
+
 
 #type(variable) is list/dict/str/int
 #python gives back True or False          
