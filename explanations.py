@@ -31,11 +31,11 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 # Write out the thing we're going to tweet
-#def buildTweet(argument1, argument2, argument3):
-#    tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
+def buildTweet(argument1, argument2, argument3):
+    tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
 #    tweet = argument1 + ", " + argument2 + ", " + " missed a vote because of '" + argument3 + "'. " + argument4   
 #    tweet = "On " + argument1 + " " + argument2 + " said '" + argument3 + ".'"
-#    sendTweet(tweet)
+    sendTweet(tweet)
 
 # Send the tweet
 def sendTweet(content):
@@ -126,7 +126,7 @@ for memid in arrayid:
             for i in irow:
                 print(i[1]['date'])
                 print(i[1]['url'])
- #               buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
+                buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
 
 
 
