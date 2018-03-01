@@ -87,8 +87,27 @@ jsonfile = response.json()
 Print out in console the 20 most recent explanations of all members of Congress formatted as tweets then tweet them out
 * Turn json string into data frame
 * Search object for arguments by iterating over rows
-* Create function buildTweet to take in arguments and form them into a sentence
-* Create function sendTweet to tweet out sentence if it hasn't been already tweeted
+* Send arguments to buildTweet to tweet out
+
+```
+#json data in senate results into dataframe
+data = jsonfile.get('results')
+for s in data:
+    member = s['results']
+    member_df = pd.DataFrame(member)
+    
+#find MD members
+member_df = senate_df.replace(np.nan, '', regex=True)
+maryland = member_df[member_df['state'].str.contains("MD")]
+
+#put only MD member ids in array
+arrayid = []
+if (len(maryland)) > 0:
+    mrowid = maryland.iterrows()
+    for m in mrowid:
+        print(m[1]['id'])
+        buildTweet(m[1]['id'])
+```
 		
 #### Version 4
 Tweet all the most recent explanations by one member of Congress from MD
