@@ -19,7 +19,7 @@ Sends out a tweet when the program runs to a Twitter account.
   - Store them so they can be passed into Twitter
   - Create keyword to tweet out
   - Tweet out keyword with authentication
-'''
+```
 import tweepy
 import json
 
@@ -32,7 +32,7 @@ consumer_key = mvkey["consumer_key"]
 consumer_secret = mvkey["consumer_secret"]
 access_token = mvkey["access_token"]
 access_token_secret = mvkey["access_token_secret"]
-'''
+```
 
 
 #### Version 2 
