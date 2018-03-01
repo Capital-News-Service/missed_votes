@@ -34,6 +34,7 @@ access_token_secret = mvkey["access_token_secret"]
 ```
   - Create keyword to tweet out
   - Tweet out keyword with authentication
+  
 ```
 # OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -64,6 +65,21 @@ Print out in console the 20 most recent explanations of all members of Congress 
 * Use requests.get to call URL for "get recent personal explanations"
 * Headers for authenticating xapikey
 * Print json as string in console
+
+```
+#opens and reads apikey.json
+apikey={}
+with open("keys/apikey.json") as file:
+    apikey = json.loads(file.read())
+#authenticate and calls api to print text
+x_api_key = apikey["x_api_key"]
+
+#calls senate members api and puts results into json
+urlsenate = 'https://api.propublica.org/congress/v1/115/senate/members.json'
+headers = {'X-API-KEY': x_api_key}
+responsesenate = requests.get(urlsenate, headers=headers)
+jsonfilesenate = responsesenate.json()
+```
 
 #### Version 3
 Print out in console the 20 most recent explanations of all members of Congress formatted as tweets then tweet them out
