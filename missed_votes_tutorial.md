@@ -18,6 +18,33 @@ Sends out a tweet when the program runs to a Twitter account.
   - Create keyword to tweet out
   - Tweet out keyword with authentication
 
+#### Version 2 
+Print out in console the 20 most recent explanations of all members of Congress as json
+* Get ProPublica Congress API key
+* Store in apikey.json file
+* Call in authentication information from apikey.json
+* Import requests
+* Use requests.get to call URL for "get recent personal explanations"
+* Headers for authenticating xapikey
+* Print json as string in console
+
+#### Version 3
+Print out in console the 20 most recent explanations of all members of Congress formatted as tweets then tweet them out
+* Turn json string into data frame
+* Search object for arguments by iterating over rows
+* Create function buildTweet to take in arguments and form them into a sentence
+* Create function sendTweet to tweet out sentence if it hasn't been already tweeted
+		
+#### Version 4
+Tweet all the most recent explanations by one member of Congress from MD
+
+#### Version 6
+Tweet out most recent by all members of Congress from MD
+
+#### Version 7
+Tweet out only new explanations by all members of Congress from MD
+
+
 
 
 
