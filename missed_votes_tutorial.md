@@ -10,10 +10,10 @@ Sends out a tweet when the program runs to a Twitter account.
 * Create a Twitter account using gmail account
   - @missed_votes
 * Get keys for Twitter account at apps.twitter.com
-* Create GitHub repo with 4 files - keys.json, readme.md, GitIgnore, & filename.py
-* Write the following code in keys.json:
+* Create GitHub repo with 4 files - mvkey.json, readme.md, GitIgnore, & explanations.py
+* Write the following code in mvkey.json:
   - consumer key, consumer key secret, access token, & access token secret
-* Write the following code in filename.py:
+* Write the following code in explanations.py:
   - Import Tweepy
   - Call in authentication information from keys.json
   - Store them so they can be passed into Twitter
@@ -21,7 +21,6 @@ Sends out a tweet when the program runs to a Twitter account.
   - Tweet out keyword with authentication
 ```
 import tweepy
-import json
 
 mvkey={}
 with open("keys/mvkey.json") as file:
@@ -33,7 +32,28 @@ consumer_secret = mvkey["consumer_secret"]
 access_token = mvkey["access_token"]
 access_token_secret = mvkey["access_token_secret"]
 ```
+  - Create keyword to tweet out
+  - Tweet out keyword with authentication
+```
+# OAuth process, using the keys and tokens
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
+# Store access keys in a way to send to Twitter
+api = tweepy.API(auth)
+
+# Write out the thing we're going to tweet
+def buildTweet(argument1):
+    print("missed votes")
+    sendTweet(tweet)
+
+# Send the tweet
+def sendTweet(content):
+    try:
+        api.update_status(content)
+    except tweepy.error.TweepError:
+        pass
+```
 
 #### Version 2 
 Print out in console the 20 most recent explanations of all members of Congress as json
@@ -61,6 +81,9 @@ Tweet out most recent by all members of Congress from MD
 #### Version 7
 Tweet out only new explanations by all members of Congress from MD
 
+
+https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-access-metrics.html
+https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html
 
 
 
