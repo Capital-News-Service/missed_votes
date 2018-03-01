@@ -18,7 +18,7 @@ Sends out a tweet when the program runs to a Twitter account.
   - Call in authentication information from keys.json
   - Store them so they can be passed into Twitter
   - Create keyword to tweet out
-  - Tweet out keyword with authentication
+  - Tweet out keyword with authentication to test
 ```
 import tweepy
 
@@ -64,9 +64,11 @@ Print out in console the 20 most recent explanations of all members of Congress 
 * Import requests
 * Use requests.get to call URL for "get recent personal explanations"
 * Headers for authenticating xapikey
-* Print json as string in console
+* Print json as string in console to test
 
 ```
+import requests
+
 #opens and reads apikey.json
 apikey={}
 with open("keys/apikey.json") as file:
@@ -74,11 +76,11 @@ with open("keys/apikey.json") as file:
 #authenticate and calls api to print text
 x_api_key = apikey["x_api_key"]
 
-#calls senate members api and puts results into json
-urlsenate = 'https://api.propublica.org/congress/v1/115/senate/members.json'
+#calls explanations api and puts results into json
+url = 'https://api.propublica.org/congress/v1/115/explanations.json'
 headers = {'X-API-KEY': x_api_key}
-responsesenate = requests.get(urlsenate, headers=headers)
-jsonfilesenate = responsesenate.json()
+response = requests.get(url, headers=headers)
+jsonfile = response.json()
 ```
 
 #### Version 3
