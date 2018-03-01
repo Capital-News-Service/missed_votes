@@ -6,17 +6,34 @@
 #### Version 1 
 Sends out a tweet when the program runs to a Twitter account.
 * Create a gmail account for bot
+  - missedvotes@gmail.com
 * Create a Twitter account using gmail account
+  - @missed_votes
 * Get keys for Twitter account at apps.twitter.com
 * Create GitHub repo with 4 files - keys.json, readme.md, GitIgnore, & filename.py
 * Write the following code in keys.json:
-  - Add consumer key, consumer key secret, access token, & access token secret
+  - consumer key, consumer key secret, access token, & access token secret
 * Write the following code in filename.py:
   - Import Tweepy
   - Call in authentication information from keys.json
   - Store them so they can be passed into Twitter
   - Create keyword to tweet out
   - Tweet out keyword with authentication
+'''
+import tweepy
+import json
+
+mvkey={}
+with open("keys/mvkey.json") as file:
+    mvkey = json.loads(file.read())
+    
+# Consumer keys and access tokens, used for OAuth
+consumer_key = mvkey["consumer_key"]
+consumer_secret = mvkey["consumer_secret"]
+access_token = mvkey["access_token"]
+access_token_secret = mvkey["access_token_secret"]
+'''
+
 
 #### Version 2 
 Print out in console the 20 most recent explanations of all members of Congress as json
