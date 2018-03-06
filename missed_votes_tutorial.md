@@ -110,13 +110,79 @@ if (len(maryland)) > 0:
 ```
 		
 #### Version 4
-Tweet all the most recent explanations by one member of Congress from MD
+Get all of the member ids from all members of Congress from MD from the House and Senate
+
+```
+#calls senate members api and puts results into json
+urlsenate = 'https://api.propublica.org/congress/v1/115/senate/members.json'
+headers = {'X-API-KEY': x_api_key}
+responsesenate = requests.get(urlsenate, headers=headers)
+jsonfilesenate = responsesenate.json()
+
+#json data in senate results into dataframe
+datasenate = jsonfilesenate.get('results')
+for s in datasenate:
+    membersenate = s['members']
+    membersenate_df = pd.DataFrame(membersenate)
+
+#find senate member ids for MD members
+membersenate_df = membersenate_df.replace(np.nan, '', regex=True)
+maryland = membersenate_df[membersenate_df['state'].str.contains("MD")]
+
+#put only MD senate member ids in array
+arrayid = []
+if (len(maryland)) > 0:
+    mrowid = maryland.iterrows()
+    for m in mrowid:
+        arrayid.append(m[1]['id'])
+        
+        
+#calls house members api and puts results into json
+urlhouse = 'https://api.propublica.org/congress/v1/115/house/members.json'
+responsehouse = requests.get(urlhouse, headers=headers)
+jsonfilehouse = responsehouse.json()
+
+#json data in house results into dataframe
+datahouse = jsonfilehouse.get('results')
+for h in datahouse:
+    memberhouse = h['members']
+    memberhouse_df = pd.DataFrame(memberhouse)
+
+#find house member ids for MD members
+memberhouse_df = memberhouse_df.replace(np.nan, '', regex=True)
+maryland = memberhouse_df[memberhouse_df['state'].str.contains("MD")]
+     
+#put only MD house member ids in array
+if (len(maryland)) > 0:
+    mrowid = maryland.iterrows()
+    for m in mrowid:
+        arrayid.append(m[1]['id'])  
+```
 
 #### Version 6
-Tweet out most recent by all members of Congress from MD
+Take member ids and send them to the excuses API to get all excuses from MD members
+
+```
+for memid in arrayid:
+
+    #calls excuses for all legislative MD members api and puts results in json
+    urlexcuse = 'https://api.propublica.org/congress/v1/members/' + memid + '/explanations/115.json'
+    responseexcuse = requests.get(urlexcuse, headers=headers)
+    jsonfileexcuse = responseexcuse.json()
+```
+
 
 #### Version 7
-Tweet out only new explanations by all members of Congress from MD
+If a MD member has no excuses remove their results
+
+```
+    dataexcuse = jsonfileexcuse.get('results')
+    if len(dataexcuse) == 0:
+        continue
+```
+
+#### Version 8
+
 
 
 https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-access-metrics.html

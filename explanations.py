@@ -3,7 +3,7 @@
 """
 Created on Wed Feb 14 10:33:32 2018
 
-@author: gmkanik
+@author: gmkaniku
 """
 
 import tweepy
@@ -35,7 +35,13 @@ def buildTweet(argument1, argument2, argument3):
     tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
 #    tweet = argument1 + ", " + argument2 + ", " + " missed a vote because of '" + argument3 + "'. " + argument4   
 #    tweet = "On " + argument1 + " " + argument2 + " said '" + argument3 + ".'"
-    sendTweet(tweet)
+    checkTweet(tweet)
+
+#look for repeat tweets
+def checkTweet(content):
+    isRepeat = False 
+    while isRepeat == False:
+        
 
 # Send the tweet
 def sendTweet(content):
@@ -129,7 +135,8 @@ for memid in arrayid:
                 buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
 
 
-
+#https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
+                
 
     
 
