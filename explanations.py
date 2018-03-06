@@ -12,6 +12,7 @@ import requests
 import pandas as pd
 import numpy as np
 
+
 #opens and reads keys.json
 mvkey={}
 with open("keys/mvkey.json") as file:
@@ -38,10 +39,10 @@ def buildTweet(argument1, argument2, argument3):
     checkTweet(tweet)
 
 #look for repeat tweets
-def checkTweet(content):
+def checkTweet(tweet):
     isRepeat = False 
     while isRepeat == False:
-        
+       
 
 # Send the tweet
 def sendTweet(content):
@@ -136,6 +137,7 @@ for memid in arrayid:
 
 
 #https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
+#https://ian-says.com/articles/lambda-dynamodb-twitter-post/
                 
 
     
