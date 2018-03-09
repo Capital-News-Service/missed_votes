@@ -36,14 +36,7 @@ def buildTweet(argument1, argument2, argument3):
     tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
 #    tweet = argument1 + ", " + argument2 + ", " + " missed a vote because of '" + argument3 + "'. " + argument4   
 #    tweet = "On " + argument1 + " " + argument2 + " said '" + argument3 + ".'"
-    sendTweet(tweet)
-#    checkTweet(tweet)
-
-#look for repeat tweets
-#def checkTweet(tweet):
-#    isRepeat = False 
-#    while isRepeat == False:
-       
+    sendTweet(tweet)       
 
 # Send the tweet
 def sendTweet(content):

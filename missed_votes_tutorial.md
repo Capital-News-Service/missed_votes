@@ -85,7 +85,7 @@ jsonfile = response.json()
 
 #### Version 3
 Print out in console the 20 most recent explanations of all members of Congress formatted as tweets then tweet them out
-* Turn json string into data frame
+* Turn dictionary into data frame
 * Search object for arguments by iterating over rows
 * Send arguments to buildTweet to tweet out
 
@@ -113,7 +113,7 @@ if (len(maryland)) > 0:
 Get all of the member ids from all members of Congress from MD from the House and Senate
 * Use requests.get to call URL for "lists of members" for senate
 * Headers for authenticating xapikey
-* Get json file as string
+* Get json file as dictionary
 * Turn only the column members into a dataframe
 * Search dataframe for "state=MD" 
 * Iterating over rows that are MD and take out member ids
@@ -173,7 +173,7 @@ if (len(maryland)) > 0:
 Take out each member id and pass it into excuse api
 * Make a for loop saying for each member id in the array id
 * Pass the id into the url of "get recent personal explanations by a specific member"
-* Get a json file
+* Get a dictionary
 
 ```
 for memid in arrayid:
@@ -184,10 +184,64 @@ for memid in arrayid:
     jsonfileexcuse = responseexcuse.json()
 ```
 
+#### Version 7
+Take out members with no excuses
+* Take the results column from the dictionary and put it in a list
+* See if there are any columns in the list that are empty
+* Pass over those columns
+
+```
+    #if MD member has no excuses removes their results
+    dataexcuse = jsonfileexcuse.get('results')
+    if len(dataexcuse) == 0:
+        continue
+```
+
+#### Version 8
+* Turn dictionay of specific member excuses into a dataframe
+* Iterate over rows to get the name and print out
+* Turn the results section of the dictionary into a seperate dataframe
+* Iterate over the rows to get the date and url to print out
+* Send name, date, and url arguments to buildTweet
+
+```
+    else:
+        #if MD member has excuses gets name and info on excuses and tweets 
+        mdexcuse_df = pd.DataFrame(jsonfileexcuse)
+        if (len(mdexcuse_df) > 0):
+            irow = mdexcuse_df.iterrows()
+            for m in irow:
+                print(m[1]['display_name'])
+    
+        dataexcuse_df = pd.DataFrame(dataexcuse)
+        if (len(dataexcuse_df) > 0):
+            irow = dataexcuse_df.iterrows()
+            for i in irow:
+                print(i[1]['date'])
+                print(i[1]['url'])
+                buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])  
+```
+
+#### Version 9
+Make a tweet to send out
+* Update the buildTweet function to import 3 arguments
+* Create a sentence of what you want to tweet out using the arguments
+* Send the sentence to the sendTweet function
+* Use a tweepy method to update Twitter status with the tweet
+
+```
+# Write out the thing we're going to tweet
+def buildTweet(argument1, argument2, argument3):
+    tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
+    sendTweet(tweet)       
+
+# Send the tweet
+def sendTweet(content):
+    api.update_status(content)
+```    
 
 
-
-
+    
 https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-access-metrics.html
 https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html
 
