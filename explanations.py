@@ -130,7 +130,7 @@ for memid in arrayid:
 
 
 #https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
-#https://ian-says.com/articles/lambda-dynamodb-twitter-post/
+
                 
 
     
