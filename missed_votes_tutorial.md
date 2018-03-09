@@ -169,7 +169,7 @@ if (len(maryland)) > 0:
         arrayid.append(m[1]['id'])  
 ```
 
-#### Version 6
+#### Version 5
 Take out each member id and pass it into excuse api
 * Make a for loop saying for each member id in the array id
 * Pass the id into the url of "get recent personal explanations by a specific member"
@@ -184,7 +184,7 @@ for memid in arrayid:
     jsonfileexcuse = responseexcuse.json()
 ```
 
-#### Version 7
+#### Version 6
 Take out members with no excuses
 * Take the results column from the dictionary and put it in a list
 * See if there are any columns in the list that are empty
@@ -197,7 +197,7 @@ Take out members with no excuses
         continue
 ```
 
-#### Version 8
+#### Version 7
 * Turn dictionay of specific member excuses into a dataframe
 * Iterate over rows to get the name and print out
 * Turn the results section of the dictionary into a seperate dataframe
@@ -222,7 +222,7 @@ Take out members with no excuses
                 buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])  
 ```
 
-#### Version 9
+#### Version 8
 Make a tweet to send out
 * Update the buildTweet function to import 3 arguments
 * Create a sentence of what you want to tweet out using the arguments
