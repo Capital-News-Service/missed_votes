@@ -111,6 +111,13 @@ if (len(maryland)) > 0:
 		
 #### Version 4
 Get all of the member ids from all members of Congress from MD from the House and Senate
+* Use requests.get to call URL for "lists of members" for senate
+* Headers for authenticating xapikey
+* Get json file as string
+* Turn only the column members into a dataframe
+* Search dataframe for "state=MD" 
+* Iterating over rows that are MD and take out member ids
+* Put members ids in separate array
 
 ```
 #calls senate members api and puts results into json
@@ -135,7 +142,10 @@ if (len(maryland)) > 0:
     mrowid = maryland.iterrows()
     for m in mrowid:
         arrayid.append(m[1]['id'])
-        
+ ```
+ * Repeat process for "lists of members" for house
+ * Put MD members ids in same array
+ ```       
         
 #calls house members api and puts results into json
 urlhouse = 'https://api.propublica.org/congress/v1/115/house/members.json'
@@ -160,7 +170,10 @@ if (len(maryland)) > 0:
 ```
 
 #### Version 6
-Take member ids and send them to the excuses API to get all excuses from MD members
+Take out each member id and pass it into excuse api
+* Make a for loop saying for each member id in the array id
+* Pass the id into the url of "get recent personal explanations by a specific member"
+* Get a json file
 
 ```
 for memid in arrayid:
@@ -172,16 +185,6 @@ for memid in arrayid:
 ```
 
 
-#### Version 7
-If a MD member has no excuses remove their results
-
-```
-    dataexcuse = jsonfileexcuse.get('results')
-    if len(dataexcuse) == 0:
-        continue
-```
-
-#### Version 8
 
 
 
