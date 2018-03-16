@@ -257,7 +257,7 @@ Running the program in AWS EC2
   - virtualenv missed_votes
   - cd missed_votes
   - source bin/activate
-  - mv <source> <destination
+  - mv <source> <destination>
   - pip install tweepy
   - pip install requests
   - pip install pandas
@@ -276,9 +276,9 @@ Running the program in AWS EC2
 #### Version 10
 Upload to Lambda
 * Sign in to https://console.aws.amazon.com/lambda
-* Click create from scratch and follow steps to upload a function
-* Once uploaded click CloudWatch Events to configure a trigger when the bot should run
-* To monitor if the function is running click the monitoring tab on the function page
+* Create from scratch a new function and follow steps to upload a function
+* Once uploaded go to CloudWatch Events to configure a trigger when the bot should run
+* To monitor if the function is running view the monitoring tab on the function page
 
 
 
