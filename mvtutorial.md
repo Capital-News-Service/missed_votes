@@ -17,8 +17,7 @@ Sends out a tweet when the program runs to a Twitter account.
   - Import Tweepy
   - Call in authentication information from keys.json
   - Store them so they can be passed into Twitter
-  - Create keyword to tweet out
-  - Tweet out keyword with authentication to test
+
 ```
 import tweepy
 
