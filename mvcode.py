@@ -126,7 +126,7 @@ for memid in arrayid:
             for i in irow:
                 print(i[1]['date'])
                 print(i[1]['url'])
-                buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
+#                buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
 
 
 #https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
