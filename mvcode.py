@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 
 
-#opens and reads keys.json
+#opens and reads mvkey.json
 mvkey={}
 with open("keys/mvkey.json") as file:
     mvkey = json.loads(file.read())
