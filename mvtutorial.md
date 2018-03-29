@@ -14,7 +14,7 @@ Sends out a tweet when the program runs to a Twitter account.
 * Write the following code in mvkey.json:
   - consumer key, consumer key secret, access token, & access token secret
 * Write the following code in explanations.py:
-  - Import Json & Tweepy
+  - Import json
   - Call in authentication information from keys.json
   - Store them so they can be passed into Twitter
 
@@ -31,6 +31,7 @@ consumer_secret = mvkey["consumer_secret"]
 access_token = mvkey["access_token"]
 access_token_secret = mvkey["access_token_secret"]
 ```
+  - Import Tweepy
   - Create keyword to tweet out
   - Tweet out keyword with authentication
   
