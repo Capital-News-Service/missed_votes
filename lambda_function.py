@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb 28 15:00:15 2018
+Created on Thu Apr  5 10:46:02 2018
 
 @author: gmkanik
 """
@@ -13,8 +13,9 @@ import pandas as pd
 import numpy as np
 
 def lambda_handler(event, context):
+    #opens and reads mvkey.json
     mvkey={}
-    with open("keys/mvkey.json") as file:
+    with open("mvkeys/mvkey.json") as file:
         mvkey = json.loads(file.read())
     
     # Consumer keys and access tokens, used for OAuth
@@ -33,13 +34,11 @@ def lambda_handler(event, context):
     # Write out the thing we're going to tweet
     def buildTweet(argument1, argument2, argument3):
         tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
-#       tweet = argument1 + ", " + argument2 + ", " + " missed a vote because of '" + argument3 + "'. " + argument4   
-#       tweet = "On " + argument1 + " " + argument2 + " said '" + argument3 + ".'"
-        sendTweet(tweet)
-    
-    # Send the tweet
+        sendTweet(tweet)       
+
+    # Send the tweet except if it has already been tweeted out
     def sendTweet(content):
-        try:    
+        try:
             api.update_status(content)
         except tweepy.error.TweepError:
             pass
@@ -48,10 +47,10 @@ def lambda_handler(event, context):
 
     #opens and reads apikey.json
     apikey={}
-    with open("keys/apikey.json") as file:
+    with open("mvkeys/apikey.json") as file:
         apikey = json.loads(file.read())
-        #authenticate and calls api to print text
-        x_api_key = apikey["x_api_key"]
+    #authenticate and calls api to print text
+    x_api_key = apikey["x_api_key"]
 
     #calls senate members api and puts results into json
     urlsenate = 'https://api.propublica.org/congress/v1/115/senate/members.json'
@@ -77,10 +76,10 @@ def lambda_handler(event, context):
             arrayid.append(m[1]['id'])
         
         
-        #calls house members api and puts results into json
-        urlhouse = 'https://api.propublica.org/congress/v1/115/house/members.json'
-        responsehouse = requests.get(urlhouse, headers=headers)
-        jsonfilehouse = responsehouse.json()
+    #calls house members api and puts results into json
+    urlhouse = 'https://api.propublica.org/congress/v1/115/house/members.json'
+    responsehouse = requests.get(urlhouse, headers=headers)
+    jsonfilehouse = responsehouse.json()
 
     #json data in house results into dataframe
     datahouse = jsonfilehouse.get('results')
@@ -126,5 +125,5 @@ def lambda_handler(event, context):
                 for i in irow:
                     print(i[1]['date'])
                     print(i[1]['url'])
-                    buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])   
+                    buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])
     return 'Hello from Lambda'
