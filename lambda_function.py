@@ -39,9 +39,10 @@ def lambda_handler(event, context):
     
     # Send the tweet
     def sendTweet(content):
-        api.update_status(content)
-#    except tweepy.error.TweepError:
-#        pass
+        try:    
+            api.update_status(content)
+        except tweepy.error.TweepError:
+            pass
 
 
 

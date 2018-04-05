@@ -15,7 +15,7 @@ import numpy as np
 
 #opens and reads mvkey.json
 mvkey={}
-with open("keys/mvkey.json") as file:
+with open("mvkeys/mvkey.json") as file:
     mvkey = json.loads(file.read())
     
 # Consumer keys and access tokens, used for OAuth
@@ -40,15 +40,16 @@ def buildTweet(argument1, argument2, argument3):
 
 # Send the tweet
 def sendTweet(content):
-    api.update_status(content)
-#    except tweepy.error.TweepError:
-#        pass
+    try:
+        api.update_status(content)
+    except tweepy.error.TweepError:
+        pass
 
 
 
 #opens and reads apikey.json
 apikey={}
-with open("keys/apikey.json") as file:
+with open("mvkeys/apikey.json") as file:
     apikey = json.loads(file.read())
 #authenticate and calls api to print text
 x_api_key = apikey["x_api_key"]
@@ -126,11 +127,8 @@ for memid in arrayid:
             for i in irow:
                 print(i[1]['date'])
                 print(i[1]['url'])
-#                buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
-
-
-#https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
-
+        buildTweet(m[1]['display_name'],i[1]['date'],i[1]['url'])       
+                
                 
 
     
