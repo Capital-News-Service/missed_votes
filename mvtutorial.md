@@ -248,7 +248,7 @@ Running the program in AWS EC2
   - #program code
   - return 'Hello from Lambda'
 * Save file in the same folder as project
-* Create a AWS account a make an instance of EC2
+* Create a AWS account and make an instance of EC2
 * Save the key as lambdadeployer.pem
 * Open the terminal and run the following lines:
   - chmod 400 lambdadeployer.pem
