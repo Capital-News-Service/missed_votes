@@ -2,3 +2,4 @@ mvkeys
 mvkeys/
 .DS_Store
 .spyproject
+.mvdeployment_package.zip

@@ -238,48 +238,7 @@ def buildTweet(argument1, argument2, argument3):
 # Send the tweet
 def sendTweet(content):
     api.update_status(content)
-```    
-
-#### Version 9 
-Running the program in AWS EC2
-* Create a file called lamda_function.py and write the following code:
-  - #put imports here
-  - def lambda_handler(event, context)
-  - #program code
-  - return 'Hello from Lambda'
-* Save file in the same folder as project
-* Create a AWS account and make an instance of EC2
-* Save the key as lambdadeployer.pem
-* Open the terminal and run the following lines:
-  - chmod 400 lambdadeployer.pem
-  - scp -i lambdadeployer.pem path/to/file ec2-user@<servername>:~/
-  - ssh -i lambdadeployer.pem ec2-user@<servername>
-  - virtualenv missed_votes
-  - cd missed_votes
-  - source bin/activate
-  - mv <source> <destination>
-  - pip install tweepy
-  - pip install requests
-  - pip install pandas
-  - pip install numpy
-  - python -c "import lambda_function as lf; lf.lambda_handler([],[])"
-  - cd ~/<project_folder_name>/lib/python2.7/site-packages/
-  - zip -r9 ~/<project_folder_name>/deployment_package.zip * 
-  - cd ~/<project_folder_name>/lib64/python2.7/site-packages/
-  - zip -gr ~/<project_folder_name>/deployment_package.zip *
-  - cd ~/<project_folder_name>
-  - zip -g deployment_package.zip <source_file>.py 
-  - zip -g deployment_package.zip <anything_else>
-  - scp -i "lambdadeployer.pem" ec2-user@<EC2_Server_Name>:~/<project_folder_name> 
-    /deployment_package.zip 
-
-#### Version 10
-Upload to Lambda
-* Sign in to https://console.aws.amazon.com/lambda
-* Create from scratch a new function and follow steps to upload a function
-* Once uploaded go to CloudWatch Events to configure a trigger when the bot should run
-* To monitor if the function is running view the monitoring tab on the function page
-
+``` 
 
 
 
