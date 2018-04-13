@@ -1,17 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 14 10:33:32 2018
-
-@author: gmkaniku
-"""
-
 import tweepy
 import json
 import requests
 import pandas as pd
 import numpy as np
-
 
 #opens and reads mvkey.json
 mvkey={}
