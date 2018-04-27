@@ -38,11 +38,7 @@ def lambda_handler(event, context):
 
     # Send the tweet except if it has already been tweeted out
     def sendTweet(content):
-        try:
-            api.update_status(content)
-        except tweepy.error.TweepError:
-            pass
-
+        api.update_status(content)
 
 
     #opens and reads apikey.json
