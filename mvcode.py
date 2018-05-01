@@ -25,7 +25,17 @@ api = tweepy.API(auth)
 # Write out the thing we're going to tweet
 def buildTweet(argument1, argument2, argument3):
     tweet = argument1 + " missed a vote on " + argument2 + ". " + argument3
-    sendTweet(tweet)       
+    tweetsave = []
+    if (len(tweet)) > 0:
+        tweetsave.append(tweet)
+    checkTweet(tweet, tweetsave)       
+
+def checkTweet(tweet, tweetsave):
+    for t in tweetsave:
+        if tweet == t:
+            pass
+        else:
+            sendTweet(tweet)
 
 # Send the tweet except if it has already been tweeted out
 def sendTweet(content):
